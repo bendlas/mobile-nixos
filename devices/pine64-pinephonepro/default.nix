@@ -115,6 +115,13 @@
 
       # Vibrate motor
       INPUT_GPIO_VIBRA = yes;
+
+      ## rockpro64
+      # ethernet
+      NET_VENDOR_STMICRO = yes;
+      STMMAC_PLATFORM = yes;
+      STMMAC_ETH = yes;
+      DWMAC_ROCKCHIP = yes;
     })
   ];
 
