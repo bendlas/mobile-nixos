@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 {
-  mobile.device.name = "pine64-pinephonepro";
+  mobile.device.name = "pine64-rockpro64";
   mobile.device.identity = {
-    name = "Pinephone Pro";
+    name = "RockPro64";
     manufacturer = "Pine64";
   };
 
@@ -82,23 +82,23 @@
       TOUCHSCREEN_GOODIX = yes;
 
       # General wireless
-      WIRELESS = yes;
+      WIRELESS = no;
       
       # Bluetooth
-      BT = yes;
-      BT_HCIUART = yes;
-      BT_HCIUART_BCM = yes;
+      BT = no;
+      # BT_HCIUART = yes;
+      # BT_HCIUART_BCM = yes;
 
       # Wifi
-      WLAN = yes;
-      WLAN_VENDOR_BROADCOM = yes;
-      BRCMUTIL = yes;
-      BRCMFMAC = yes;
-      BRCMFMAC_SDIO = yes;
-      BRCMSMAC = yes;
-      BRCM_TRACING = yes;
-      BRCMDBG = yes;
-      MAC80211 = yes;
+      WLAN = no;
+      # WLAN_VENDOR_BROADCOM = yes;
+      # BRCMUTIL = yes;
+      # BRCMFMAC = yes;
+      # BRCMFMAC_SDIO = yes;
+      # BRCMSMAC = yes;
+      # BRCM_TRACING = yes;
+      # BRCMDBG = yes;
+      # MAC80211 = yes;
 
       # Sensors
       STK3310 = yes; # Light sensor
@@ -122,6 +122,13 @@
       STMMAC_PLATFORM = yes;
       STMMAC_ETH = yes;
       DWMAC_ROCKCHIP = yes;
+
+      # HDMI audio
+      DRM_DW_HDMI_I2S_AUDIO = yes;
+      DRM_DW_HDMI_CEC = yes;
+      SND_SOC_ROCKCHIP_I2S = yes;
+      SND_SOC_ROCKCHIP_I2S_TDM = yes;
+      SND_SOC_ROCKCHIP_SPDIF = yes;
     })
   ];
 

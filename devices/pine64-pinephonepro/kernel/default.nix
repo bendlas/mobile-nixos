@@ -23,11 +23,11 @@ mobile-nixos.kernel-builder {
     ./0001-usb-dwc3-Enable-userspace-role-switch-control.patch
   ];
 
-  postInstall = ''
-    echo ":: Installing FDTs"
-    mkdir -p $out/dtbs/rockchip
-    cp -v "$buildRoot/arch/arm64/boot/dts/rockchip/rk3399-pinephone-pro.dtb" "$out/dtbs/rockchip/"
-  '';
+  # postInstall = ''
+  #   echo ":: Installing FDTs"
+  #   mkdir -p $out/dtbs/rockchip
+  #   cp -v "$buildRoot/arch/arm64/boot/dts/rockchip/rk3399-pinephone-pro.dtb" "$out/dtbs/rockchip/"
+  # '';
 
   isModular = false;
   isCompressed = false;
