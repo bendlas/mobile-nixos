@@ -6,14 +6,14 @@
 }:
 
 mobile-nixos.kernel-builder {
-  version = "6.0.8";
+  version = "6.2.2";
   configfile = ./config.aarch64;
 
   src = fetchFromGitLab {
     owner = "pine64-org";
     repo = "linux";
-    rev = "ppp-6.0.8-ppkb";
-    sha256 = "sha256-t7OwU6wRQlU2XCfS1Vd2yWlWzoneFqO0qPa8AZWIAmU=";
+    rev = "ppp-6.2-20230304-1338";
+    sha256 = "sha256-wdW07wqkqTSs3CF59yuu9NfXUzt9zCjT+FoouHSqmGM=";
   };
 
   patches = [
