@@ -5,18 +5,18 @@
     ./kernel-config.nix
   ];
 
-  mobile.device.name = "pine64-pinephonepro";
+  mobile.device.name = "pine64-pinetab2";
   mobile.device.identity = {
-    name = "Pinephone Pro";
+    name = "Pinetab2";
     manufacturer = "Pine64";
   };
   mobile.device.supportLevel = "supported";
 
   mobile.hardware = {
-    soc = "rockchip-rk3399s";
-    ram = 1024 * 4;
+    soc = "rockchip-rk3566";
+    ram = 1024 * 8;
     screen = {
-      width = 720; height = 1440;
+      width = 800; height = 1280;
     };
   };
 
@@ -25,22 +25,22 @@
   };
 
   boot.kernelParams = [
-    "earlycon=uart8250,mmio32,0xff1a0000"
+    # "console=ttyS2,1500000n8" "rootwait" "root=LABEL=NIXOS_SD" "rw"
+    # "earlycon=uart8250,mmio32,0xff1a0000"
   ];
 
-  # Serial console on ttyS2, using the serial headphone adapter.
-  mobile.boot.serialConsole = "ttyS2,115200";
+  mobile.boot.serialConsole = "ttyS2,1500000n8";
 
   mobile.system.type = "u-boot";
 
   mobile.usb.mode = "gadgetfs";
 
 
-  # It seems Pine64 does not have an idVendor...
-  mobile.usb.idVendor = "1209";  # http://pid.codes/1209/
-  mobile.usb.idProduct = "0069"; # "common tasks, such as testing, generic USB-CDC devices, etc."
+  ## It seems Pine64 does not have an idVendor...
+  mobile.usb.idVendor = "1209";  ## http://pid.codes/1209/
+  mobile.usb.idProduct = "0069"; ## "common tasks, such as testing, generic USB-CDC devices, etc."
 
-  # Mainline gadgetfs functions
+  ## Mainline gadgetfs functions
   mobile.usb.gadgetfs.functions = {
     rndis = "rndis.usb0";
     mass_storage = "mass_storage.0";
@@ -48,26 +48,11 @@
   };
 
   mobile.boot.stage-1.bootConfig = {
-    # Used by target-disk-mode to share the internal drive
-    storage.internal = "/dev/disk/by-path/platform-fe330000.mmc";
+    ## Used by target-disk-mode to share the internal drive
+    # storage.internal = "/dev/disk/by-path/platform-fe330000.mmc";
   };
 
-  mobile.device.firmware = pkgs.callPackage ./firmware {};
-  mobile.boot.stage-1.firmware = [
-    config.mobile.device.firmware
-  ];
-  hardware.firmware = [
-    config.mobile.device.firmware
-  ];
-
-  # Modem service
-  services.eg25-manager.enable = lib.mkDefault true;
-
-  # Alsa UCM profiles
-  mobile.quirks.audio.alsa-ucm-meld = true;
-  environment.systemPackages = [ pkgs.mobile-nixos.pine64-alsa-ucm ];
-
-  mobile.boot.stage-1.tasks = [ ./usb_role_switch_task.rb ];
+  # mobile.boot.stage-1.tasks = [ ./usb_role_switch_task.rb ];
 
   mobile.documentation.hydraOutputs = [
     ["installer.@device@" "Installer image"]

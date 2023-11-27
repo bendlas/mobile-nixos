@@ -11,6 +11,7 @@ let
   anyRockchip = lib.any (v: v) [
     cfg.rockchip-op1.enable
     cfg.rockchip-rk3399s.enable
+    cfg.rockchip-rk3566.enable
   ];
 in
 {
@@ -25,6 +26,11 @@ in
       default = false;
       description = "enable when SOC is RK3399S";
     };
+    hardware.socs.rockchip-rk3566.enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "enable when SOC is RK3566";
+    };
   };
 
   config = mkMerge [
@@ -35,6 +41,11 @@ in
     }
     {
       mobile = mkIf cfg.rockchip-rk3399s.enable {
+        system.system = "aarch64-linux";
+      };
+    }
+    {
+      mobile = mkIf cfg.rockchip-rk3566.enable {
         system.system = "aarch64-linux";
       };
     }
