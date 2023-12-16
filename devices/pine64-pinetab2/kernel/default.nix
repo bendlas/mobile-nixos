@@ -16,6 +16,12 @@ mobile-nixos.kernel-builder rec {
 
   configfile = ./config.aarch64;
 
-  isModular = false;
+  postInstall = ''
+    echo ":: Installing FDTs"
+    mkdir -p $out/dtbs/
+    cp -vR "$buildRoot/arch/arm64/boot/dts/rockchip" "$out/dtbs/"
+  '';
+
+  isModular = true;
   isCompressed = false;
 }
